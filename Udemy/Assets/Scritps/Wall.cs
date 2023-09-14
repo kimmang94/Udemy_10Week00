@@ -7,20 +7,21 @@ using UnityEngine.SceneManagement;
 public class Wall : MonoBehaviour
 {
 
-    public float speed = -5f;
+    private float speed = -5f;
     private Player player;
-    void Start()
+    private  void Start()
     {
         player = GameObject.Find(name: "Player").GetComponent<Player>();
     }
 
-    void Update()
+    private  void Update()
     {
         transform.Translate(speed * Time.deltaTime , 0, 0);
         if (transform.position.x < -10)
         {
             Destroy(gameObject);
             player.Addscore(1);
+            Debug.Log("Destroy Test");
         }
     }
 

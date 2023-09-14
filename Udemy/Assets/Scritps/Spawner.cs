@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject[] wallPrefab;
+    
+    [SerializeField]
+    private GameObject[] wallPrefab;
 
-    public float interval = 1.5f;
+    private float interval = 1.5f;
 
-    public float range = 3;
+    private float range = 3;
     
     private float term;
 
-    void Start()
+    private void Start()
     {
         term = interval;
     }
 
-    void Update()
+    private void Update()
+    {
+        Spawn();
+    }
+
+    /// <summary>
+    /// 프리팹을 생성하는 메서드
+    /// </summary>
+    private void Spawn()
     {
         term += Time.deltaTime;
         if (term >= interval)
