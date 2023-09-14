@@ -11,13 +11,13 @@ public class Player : MonoBehaviour
     private float jumpPower = 5f;
     [SerializeField]
     private float moveSpeed = 1;
-    
-    private TextMesh scoreOutPut = null;
+
+    private TextMesh scoreOutPut;
     private int score = 0;
     private float doubleJumpPower = 2;
     private float DangerPos = -3;
 
-    [SerializeField] private Rigidbody rigid = null;
+    [SerializeField] private Rigidbody rigid;
     
     private void Start()
     {

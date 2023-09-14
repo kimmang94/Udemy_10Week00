@@ -21,7 +21,6 @@ public class Wall : MonoBehaviour
         {
             Destroy(gameObject);
             player.Addscore(1);
-            Debug.Log("Destroy Test");
         }
     }
 
