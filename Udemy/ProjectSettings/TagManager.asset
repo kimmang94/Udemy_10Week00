@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Trap
   - Wall
+  - Ground
+  - DeadZone
   layers:
   - Default
   - TransparentFX
