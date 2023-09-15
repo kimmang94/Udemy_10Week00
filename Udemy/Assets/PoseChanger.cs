@@ -14,6 +14,16 @@ public class PoseChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (anim == null)
+            {
+                anim = GetComponent<Animator>();
+            }
+            else
+            {
+                anim.SetTrigger("Next");
+            }
+        }
     }
 }
