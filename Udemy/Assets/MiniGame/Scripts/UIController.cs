@@ -7,14 +7,18 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private Managers manager;
+    [SerializeField] private Managers manager = null;
     [SerializeField] private Button retryBtn = null;
-
+    [SerializeField] private Button startBtn = null;
+    
     [SerializeField] private GameObject retryPanel = null;
     [SerializeField] private GameObject claerPanel = null;
+
+    [SerializeField] private GameObject introPanel = null;
     // Start is called before the first frame update
     void Start()
     {
+        startBtn.onClick.AddListener(StartBtn);
         retryBtn.onClick.AddListener(RetryBtn);
     }
 
@@ -31,9 +35,15 @@ public class UIController : MonoBehaviour
         }
     }
 
+    private void StartBtn()
+    {
+        introPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
     private void RetryBtn()
     {
         SceneManager.LoadScene("MiniGame");
+        
         retryPanel.SetActive(false);
         claerPanel.SetActive(false);
     }
