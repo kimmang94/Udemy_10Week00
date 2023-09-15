@@ -24,7 +24,7 @@ public class Wall : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionETnter(Collision other)
     {
         SceneManager.LoadScene("Scenes/Game");
     }

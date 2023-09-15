@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private float doubleJumpPower = 2;
     private float DangerPos = -3;
 
+    private float rotateSpeed = 3;
+    
     [SerializeField] private Rigidbody rigid;
     
     private void Start()
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Jump();
+        RotateChar();
     }
 
     /// <summary>
@@ -47,6 +50,20 @@ public class Player : MonoBehaviour
         //transform.Translate(moveSpeed * Time.deltaTime , 0, 0);
     }
 
+    private void RotateChar()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            transform.Rotate(new Vector3(0, 0, -5 * rotateSpeed));
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            {
+                transform.Rotate(new Vector3(0, 0, 5 * rotateSpeed) );
+            }
+        }
+    }
+
     /// <summary>
     /// 매개변수 int형 s를 받아 s 만큼 점수를 증가시키는 메서드
     /// </summary>
@@ -60,7 +77,15 @@ public class Player : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (other.gameObject.tag == "Trap")
+        {
+            
+        }
+        else if (other.gameObject.tag == "Wall")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
     }
 }
 
