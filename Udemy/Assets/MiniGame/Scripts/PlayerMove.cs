@@ -12,43 +12,54 @@ public class PlayerMove : MonoBehaviour
     private float speed = 5f;
     [SerializeField] private float jumpPower = 3f;
     [SerializeField]private bool isJumping = false;
-    
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         Move();
-        transform.Translate(0, 0, speed * Time.deltaTime);
-        anim.SetBool("isRun", true);
-        anim = GetComponent<Animator>();
     }
 
     private void Move()
     {
-        anim.SetTrigger("Wait");
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow)){
-            transform.rotation = Quaternion.Euler(0, 270, 0);
-            
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.3f);
+            transform.position += ((Vector3.left * (Time.deltaTime * speed)));
+            anim.SetBool("isRun", true);
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow)){
-            transform.rotation = Quaternion.Euler(0, 90, 0);
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.3f);
+            transform.position += ((Vector3.right * (Time.deltaTime * speed)));
+            anim.SetBool("isRun", true);
         }
         
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            isJumping = true;
+            anim.SetBool("isRun", false);
+            anim.SetBool("Wait", true);
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            anim.SetBool("isRun", false);
+            anim.SetBool("Wait", true);
+        }
+        
+        if (Input.GetButtonDown("Jump") )
+        {
             rigid.velocity = new Vector3(0, jumpPower, 0);
             {
+                anim.SetBool("isJump", true);
                 rigid.velocity = new Vector3(0, jumpPower ,0);
             }
+            
         }
-
+        anim.SetBool("isJump", false);
     }
 
-    private void OnCollisionStay(Collision other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            isJumping = false;
-        }
-    }
 }
